@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Bin Collections{% endblock %}
+
+{% block page_content %}
+{% if items %}
+<div class="container">
+  <h2 class="mb-3">Upcoming Bin Collections</h2>
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Next Collection</th>
+      <th scope="col">Collection Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bin in items %}
+    <tr class="table-{{bin.name.split(' ')[0]|lower}}">
+      <td>{{ bin.name }}</td>
+      <td>{{ "%02d"|format(bin.collection_days|int) }} Day{% if bin.collection_days|int != 1 %}s{% endif %}</td>
+      <td>{{ bin.collection_date }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="alert alert-warning" role="alert">
+    <i class="bi bi-exclamation" style="font-size: 1.5rem;">No bin collection data available.</i>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

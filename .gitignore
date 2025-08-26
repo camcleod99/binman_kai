@@ -1,0 +1,7 @@
+/logs
+/misc
+/.venv
+/instance
+/.idea
+/logs/*.log
+/todo
