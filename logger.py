@@ -4,18 +4,6 @@ from logging.handlers import RotatingFileHandler
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
-# def init_log(module: str):
-#     filename = os.path.join(LOG_DIR, f"{module}.log")
-#     logging.basicConfig(
-#         level=logging.INFO,
-#         format="%(asctime)s [%(levelname)s] %(message)s",
-#         handlers=[
-#             logging.FileHandler(filename, mode="a"),  # append to file
-#             logging.StreamHandler()  # also keep printing to console
-#         ]
-#     )
-#     return logging.getLogger(__name__)
-
 def init_log(module: str):
     logger = logging.getLogger(module)
     logger.setLevel(logging.INFO)

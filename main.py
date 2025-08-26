@@ -1,23 +1,13 @@
-# NOTE: flask_bootstrap support provided via Bootstrap-Flask
-import logging, os
-from datetime import datetime
-from soup import Soup
-from flask import Flask, render_template
-from flask_bootstrap import Bootstrap5
-from logger import init_log
-from database import *
-from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timedelta
 from setup import init_app
+from database import *
 from server import *
+from logger import init_log
 
 # GLOBALS
 DEFAULT_URL = "https://www.eastdunbarton.gov.uk/services/a-z-of-services/bins-waste-and-recycling/bins-and-recycling/collections/?uprn=132015695&m="
 
 log = init_log("main")
-
-# FLASK
-# app = Flask(__name__)
-# Bootstrap5(app)
 
 if __name__ == "__main__":
     soup = Soup()
@@ -42,10 +32,8 @@ if __name__ == "__main__":
         if data_system_url is None or data_system_last_update is None:
             log.warning("System table missing 'target_url' or 'last_update'.")
 
-    from datetime import datetime, timedelta
-
     # Update if bins last update was longer than than 24 hours
-    if datetime.now() - datetime.fromisoformat(data_system_last_update) < timedelta(days=1):
+    if datetime.now() - datetime.fromisoformat(data_system_last_update) > timedelta(days=1):
         log.info("Last Update was more than a day ago. Updating...")
         data_site = soup.get_data(data_system_url)
         update_timestamp = str(datetime.now())

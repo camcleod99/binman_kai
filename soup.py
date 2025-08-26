@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-import requests
 from logger import init_log
 from database import *
+import requests
 
 TEST_URL = "https://www.eastdunbarton.gov.uk/services/a-z-of-services/bins-waste-and-recycling/bins-and-recycling/collections/?uprn=132015695"
 

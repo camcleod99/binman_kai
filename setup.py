@@ -1,3 +1,4 @@
+# NOTE: flask_bootstrap support provided via Bootstrap-Flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap5

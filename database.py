@@ -1,8 +1,7 @@
 import os
 from sqlalchemy.exc import SQLAlchemyError
 from logger import init_log
-from setup import db  # Import only the db object
-
+from setup import db
 
 os.makedirs(os.path.dirname(__file__) + "/instance", exist_ok=True)
 db_path = os.path.join(os.path.dirname(__file__), "instance", "app.sqlite")

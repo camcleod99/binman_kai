@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 from flask import render_template
 from sqlalchemy.exc import SQLAlchemyError
 from logger import init_log
