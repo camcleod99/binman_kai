@@ -24,10 +24,8 @@ def data_init(app, default_url: str, bin_data, update_timestamp):
     with app.app_context():
         db.create_all()
         try:
-            if not System.query.filter_by(key="target_url").first():
-                db.session.add(System(key="target_url", value=default_url))
-            if not System.query.filter_by(key="last_update").first():
-                db.session.add(System(key="last_update", value=update_timestamp))
+            db.session.add(System(key="target_url", value=default_url))
+            db.session.add(System(key="last_update", value=update_timestamp))
             db.session.commit()
             log.info(f"Database Initialized")
         except SQLAlchemyError as e:
@@ -66,6 +64,8 @@ def data_update(app, bin_data, route_update_timestamp):
             system_entry = System.query.filter_by(key="last_update").first()
             if system_entry:
                 system_entry.value = route_update_timestamp
+            else:
+                db.session.add(System(key="last_update",value=route_update_timestamp))
             log.info(f"Database Updated")
             db.session.commit()
     except SQLAlchemyError as e:
@@ -81,9 +81,26 @@ def url_update(app, url):
                 system_entry.value = url
             else:
                 # Insert if missing
-                system_entry = System(key="target_url", value=url)
+                db.session.add(System(key="target_url", value=url))
                 db.session.commit()
-            log.info(f"Database Updated")
+            log.info(f"Target URL Updated")
+            db.session.commit()
+    except SQLAlchemyError as e:
+        log.critical(f"SQLAlchemyError in data_update: {e}")
+        raise
+
+def date_update(app, date):
+    try:
+        with app.app_context():
+            system_entry = System.query.filter_by(key="last_update").first()
+            if system_entry:
+                # Update existing value
+                system_entry.value = date
+            else:
+                # Insert if missing
+                db.session.add(System(key="last_update", value=date))
+                db.session.commit()
+            log.info(f"Last Update Updated")
             db.session.commit()
     except SQLAlchemyError as e:
         log.critical(f"SQLAlchemyError in data_update: {e}")

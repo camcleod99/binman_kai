@@ -1,0 +1,10 @@
+services:
+  binman_kai:
+    build: .
+    container_name: binman_kai
+    ports:
+      - "7777:9595"
+    volumes:
+      # Database
+      - /DATA/AppData/binman_kai/instance:/instance
+    restart: unless-stopped    

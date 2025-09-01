@@ -12,7 +12,6 @@ class Soup:
         self.log = log_soup
         pass
 
-
     def get_data(self, url = TEST_URL) -> list or tuple:
         self.log.info(f"Soup - Fetching {url}:")
         try:
