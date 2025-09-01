@@ -1,12 +1,17 @@
-# NOTE: flask_bootstrap support provided via Bootstrap-Flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+# NOTE: flask_bootstrap support provided via Bootstrap-Flask, ignore warning.
 from flask_bootstrap import Bootstrap5
+from flask_wtf import CSRFProtect
 import os
+from dotenv import load_dotenv
 
 # Create the Flask app instance and set up bootstrap
 app = Flask(__name__)
 Bootstrap5(app)
+csrf = CSRFProtect(app)
+load_dotenv()
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "fallback-secret")
 
 # Create an instance folder if it doesn't exist
 os.makedirs(app.instance_path, exist_ok=True)

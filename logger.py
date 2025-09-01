@@ -11,7 +11,8 @@ def init_log(module: str):
     if not logger.handlers:
         log_file = os.path.join(LOG_DIR, f"{module}.log")
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        file_handler = RotatingFileHandler(log_file, maxBytes=10485760, backupCount=5)
+        
+        file_handler = RotatingFileHandler(log_file, maxBytes=10485760, backupCount=3)
         file_handler.setFormatter(formatter)
         file_handler.setLevel(logging.INFO)
 

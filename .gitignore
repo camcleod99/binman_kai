@@ -4,4 +4,4 @@
 /instance
 /.idea
 /logs/*.log
-/todo
+.env

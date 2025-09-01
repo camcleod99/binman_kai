@@ -31,7 +31,7 @@ class Soup:
             raise
 
         output = []
-        table_rows = [r for r in data if r]
+        table_rows = [row_data for row_data in data if row_data]
         for row in table_rows:
             if row is None:
                 continue

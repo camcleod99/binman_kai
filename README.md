@@ -6,7 +6,7 @@ automatically.
 ## Install
 ### Please note - Bootstrap Flask
 I use bootstrap-flask to allow use of bootstrap5 with this project. This has a noted history of being a right pain and 
-I appologise for that. Most IDEs will complain about the lack of the defunct flask-bootstrap and cause nonsense as a 
+I apologise for that. Most IDEs will complain about the lack of the defunct flask-bootstrap and cause nonsense as a 
 result.
 
 ### Clone and CD into project

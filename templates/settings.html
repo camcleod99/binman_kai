@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block page_content %}
+<div class="container mt-4">
+    <h2>Settings</h2>
+    {{ render_form(form) }}
+    <a class="btn btn-danger" href="{{ url_for('settings_reset') }}">Reset</a>
+</div>
+{% endblock %}

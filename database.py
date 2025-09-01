@@ -71,3 +71,20 @@ def data_update(app, bin_data, route_update_timestamp):
     except SQLAlchemyError as e:
         log.critical(f"SQLAlchemyError in data_update: {e}")
         raise
+
+def url_update(app, url):
+    try:
+        with app.app_context():
+            system_entry = System.query.filter_by(key="target_url").first()
+            if system_entry:
+                # Update existing value
+                system_entry.value = url
+            else:
+                # Insert if missing
+                system_entry = System(key="target_url", value=url)
+                db.session.commit()
+            log.info(f"Database Updated")
+            db.session.commit()
+    except SQLAlchemyError as e:
+        log.critical(f"SQLAlchemyError in data_update: {e}")
+        raise

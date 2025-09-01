@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block page_content %}
+<div class="container mt-4">
+    <h2>Update</h2>
+{% if update_question %}
+    <div class>
+        <p>It has been less than a day since you updated the schedule. It is usually not required to update more often than
+        once a day.</p>
+        <p>Would you like to update anyway?</p>
+        <a class="btn btn-light" href="{{ url_for('update') }}?force_update=1">Yes</a>
+        <a class="btn btn-primary" href="{{ url_for('index') }}">No</a>
+    </div>
+{% endif %}
+{% if update_successful %}
+    <div class>
+        <p>Update successful.</p>
+        <a class="btn btn-primary" href="{{ url_for('index') }}">ok</a>
+    </div>
+{% endif %}
+</div>
+{% endblock %}
+
