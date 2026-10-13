@@ -18,7 +18,13 @@
     {% for bin in items %}
     <tr class="table-{{bin.name.split(' ')[0]|lower}}">
       <td>{{ bin.name }}</td>
-      <td>{{ "%02d"|format(bin.collection_days|int) }} Day{% if bin.collection_days|int != 1 %}s{% endif %}</td>
+      <td>{% set days = bin.collection_days | default(0) | int %}
+{%- if days > 0 -%}
+  {{ '%02d' | format(days) }} Day{{ 's' if days != 1 else '' }}
+{%- else -%}
+  -
+{%- endif -%}
+      </td>
       <td>{{ bin.collection_date }}</td>
     </tr>
     {% endfor %}

@@ -6,5 +6,5 @@ services:
       - "7777:9595"
     volumes:
       # Database
-      - /DATA/AppData/binman_kai/instance:/instance
+      - ./AppData/instance:/instance
     restart: unless-stopped    

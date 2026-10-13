@@ -35,8 +35,13 @@ class Soup:
             if row is None:
                 continue
             else:
+                self.log.info(f"{row}")
                 collection_type = row[0].strip()
-                collection_days, collection_date = row[1].split("days", 1)
+                if "Today" in row[1]:
+                    collection_days = "0"
+                    collection_date = "Today"
+                else:
+                    collection_days, collection_date = row[1].split("days", 1)
                 output.append([collection_type, collection_days.strip(), collection_date.strip()])
                 self.log.info(f"Output Added: {collection_type}, {collection_days.strip()}, {collection_date.strip()}")
         return output
